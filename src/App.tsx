@@ -7,7 +7,7 @@ import AskSupport from './components/AskSupport'
 import themeLight from './theme/themeLight'
 import themeDark from './theme/themeDark'
 
-const apiUrl = '/api'
+const apiUrl = 'http://localhost:8000/api'
 const Routes = createRoutesFrom(import.meta.globEager('../pages/**/*'))
 
 function App() {

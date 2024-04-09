@@ -15,10 +15,10 @@ export const storage = {
 }
 
 const authProvider = (apiUrl: string): AuthProvider => ({
-    login: ({ username, password }) => {
-        const url = `${apiUrl}/login`
-        return _.post(url)({ data: { username, password } }).then(({ data }) => {
-            storage.set(tokenStorageKey, data.token)
+    login: ({ email, password }) => {
+        const url = `${apiUrl}/users/login`
+        return _.post(url)({ data: { email, password } }).then(({ token }) => {
+            storage.set(tokenStorageKey, token)
         })
     },
     checkAuth: () => {

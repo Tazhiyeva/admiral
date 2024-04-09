@@ -13,6 +13,8 @@ import {
     DatePickerInput,
     AjaxSelectInput,
     SlugInput,
+    RadioInput,
+    DateRangePickerInput,
 } from '../../../admiral'
 import api from '../../api'
 
@@ -20,84 +22,86 @@ const onImageUpload = (file: Blob) => {
     return api.editorImageUpload('editorUpload', { file })
 }
 
-export const path = '/crud-users/es'
-export const resource = 'users'
-
-export const UsersCRUD = createCRUD({
+export const path = '/crud-games'
+export const resource = 'admin/gamecards'
+export const GamesCRUD = createCRUD({
     path,
     resource,
     index: {
-        title: 'Usuarios',
-        newButtonText: 'Crear',
+        title: 'Games CRUD',
+        newButtonText: 'Create New Game',
         tableColumns: [
             {
-                title: 'Foto',
-                dataIndex: 'avatar',
-                key: 'avatar',
+                title: 'Title',
+                dataIndex: 'title',
+                key: 'title',
+                width: 90,
+            },
+            {
+                title: 'Cover',
+                dataIndex: 'cover_url',
+                key: 'cover_url',
                 width: 90,
                 render: (value) => <FileField {...value} />,
             },
             {
-                title: 'Nombre',
-                dataIndex: 'name',
-                key: 'name',
+                title: 'Description',
+                dataIndex: 'description',
+                key: 'description',
                 width: 200,
-                sorter: true,
             },
             {
-                title: 'Email',
-                dataIndex: 'email',
-                key: 'email',
+                title: 'City',
+                dataIndex: 'city',
+                key: 'city',
             },
             {
-                title: 'Grupo',
-                dataIndex: 'group',
-                key: 'group',
+                title: 'Matched Players',
+                dataIndex: 'matched_players',
+                key: 'matched_players',
                 render: (value) => (Array.isArray(value) ? value.join(', ') : value),
             },
             {
-                title: 'Rol',
-                dataIndex: 'role',
-                key: 'role',
+                title: 'Status',
+                dataIndex: 'status',
+                key: 'status',
                 width: 150,
-                ellipsis: true,
             },
             {
-                title: 'Activo',
+                title: 'Active',
                 dataIndex: 'active',
                 key: 'active',
                 width: 150,
-                render: (value) => (value ? 'Sí' : 'No'),
+                render: (value) => (value ? 'Yes' : 'No'),
             },
         ],
         tableConfig: { dndRows: true },
     },
     filter: {
-        topToolbarButtonText: 'Filtros',
+        topToolbarButtonText: 'Filter',
         fields: (
             <>
-                <TextInput label="Nombre" name="name" placeholder="Nombre" />
+                <TextInput label="Name" name="name" placeholder="Name" />
                 <AjaxSelectInput
-                    label="Puesto"
+                    label="Role"
                     name="role"
-                    placeholder="Selecciona un puesto"
+                    placeholder="Choose Role"
                     fetchOptions={(field, query) =>
                         api.getAjaxSelectOptions(resource, field, query)
                     }
                 />
-                <BooleanInput label="Activo?" name="active" />
-                <TimePickerInput label="Hora" name="time" placeholder="Hora" format="HH:mm" />
-                <DatePickerInput label="Fecha" name="date" placeholder="Fecha" />
-                <SelectInput
-                    label="Grupo"
-                    name="group"
-                    placeholder="Selecciona un grupo"
-                    mode="multiple"
-                >
-                    <SelectInput.Option value="admin">Administrador</SelectInput.Option>
+                <BooleanInput label="Active?" name="active" />
+                <TimePickerInput label="Time" name="time" placeholder="Time" format="HH:mm" />
+                <DateRangePickerInput label="Date" name="date" />
+                <SelectInput label="Group" name="group" placeholder="Choose Group" mode="multiple">
+                    <SelectInput.Option value="admin">Admins</SelectInput.Option>
                     <SelectInput.Option value="project_manager">
-                        Gerente de proyecto
+                        Project Managers
                     </SelectInput.Option>
+                </SelectInput>
+                <SelectInput label="Role 2" name="role 2" placeholder="Choose Role 2">
+                    <SelectInput.Option value="accountant">Accountant</SelectInput.Option>
+                    <SelectInput.Option value="recruiter">Recruiter</SelectInput.Option>
                 </SelectInput>
             </>
         ),
@@ -107,167 +111,159 @@ export const UsersCRUD = createCRUD({
             fields: (
                 <>
                     <TextInput label="Id" name="id" placeholder="Id" required />
-                    <TextInput label="Nombre" name="name" placeholder="Nombre" />
+                    <TextInput label="Name" name="name" placeholder="Name" />
                     <SlugInput label="Slug" name="slug" placeholder="Slug" from="name" />
                     <TextInput label="Email" name="email" placeholder="Email" required />
                     <TextInput
-                        label="Contraseña"
+                        label="Password"
                         type="password"
                         name="password"
-                        placeholder="Contraseña"
+                        placeholder="Password"
                         required
                     />
                     <SelectInput
-                        label="Grupo"
+                        label="Group"
                         name="group"
-                        placeholder="Selecciona un grupo"
+                        placeholder="Choose Group"
                         required
                         mode="multiple"
                     >
-                        <SelectInput.Option value="admin">Administración</SelectInput.Option>
+                        <SelectInput.Option value="admin">Administration</SelectInput.Option>
                         <SelectInput.Option value="project_manager">
-                            Gerentes de proyecto
+                            Project managers
                         </SelectInput.Option>
                     </SelectInput>
-                    <SelectInput
-                        label="Puesto"
-                        name="role"
-                        placeholder="Selecciona un puesto"
-                        required
-                    >
-                        <SelectInput.Option value="accountant">Contador</SelectInput.Option>
-                        <SelectInput.Option value="recruiter">
-                            Oficial de Recursos Humanos
-                        </SelectInput.Option>
-                    </SelectInput>
+                    <RadioInput label="Role" name="role" required />
                     <FilePictureInput
                         columnSpan={2}
-                        label="Foto"
+                        label="Avatar"
                         name="avatar"
                         accept="image/*"
                         maxCount={1}
                     />
                     <DraggerInput
                         columnSpan={2}
-                        label="Imágenes"
+                        label="Images"
                         name="images"
                         accept="image/*"
                         multiple
                     />
                     <EditorInput
                         columnSpan={2}
-                        label="Descripción"
+                        label="Description"
                         name="description"
                         onImageUpload={onImageUpload}
                     />
-                    <ArrayInput label="Horario" name="schedule" required>
+                    <ArrayInput label="Schedule" name="schedule" required>
                         <SelectInput
-                            label="Día de la semana"
+                            label="Day of the week"
                             name="day"
-                            placeholder="Día de la semana"
+                            placeholder="Day of the week"
                             required
                         />
                         <TimePickerInput
-                            label="Hora de apertura"
+                            label="Opening time"
                             name="start_time"
-                            placeholder="Hora de apertura"
+                            placeholder="Opening time"
                             format="HH:mm"
                         />
                         <TimePickerInput
-                            label="Hora de cierre"
+                            label="Closing time"
                             name="end_time"
-                            placeholder="Hora de cierre"
+                            placeholder="Closing time"
                             format="HH:mm"
                         />
-                        <BooleanInput label="¿Día libre?" name="day_off" />
+                        <BooleanInput label="Day off?" name="day_off" />
                     </ArrayInput>
-                    <BooleanInput label="Activo?" name="active" />
+
+                    <BooleanInput label="Active?" name="active" />
                 </>
             ),
         },
         edit: {
             fields: (
                 <>
-                    <TextInput label="Nombre" name="name" placeholder="Nombre" />
+                    <TextInput label="Name" name="name" placeholder="Name" />
                     <SlugInput label="Slug" name="slug" placeholder="Slug" from="name" disabled />
                     <TextInput label="Email" name="email" placeholder="Email" required />
                     <TextInput
-                        label="Contraseña"
+                        label="Password"
                         type="password"
                         name="password"
-                        placeholder="Contraseña"
+                        placeholder="Password"
                         required
                     />
                     <SelectInput
-                        label="Grupo"
+                        label="Group"
                         name="group"
-                        placeholder="Selecciona un grupo"
+                        placeholder="Choose Group"
                         required
                         mode="multiple"
                     >
-                        <SelectInput.Option value="admin">Administración</SelectInput.Option>
+                        <SelectInput.Option value="admin">Administration</SelectInput.Option>
                         <SelectInput.Option value="project_manager">
-                            Gerentes de proyecto
+                            Project managers
                         </SelectInput.Option>
                     </SelectInput>
                     <AjaxSelectInput
-                        label="Puesto"
+                        label="Role"
                         name="role"
-                        placeholder="Selecciona un puesto"
+                        placeholder="Choose Role"
                         fetchOptions={(field, query) =>
                             api.getAjaxSelectOptions(resource, field, query)
                         }
                     />
                     <FilePictureInput
                         columnSpan={2}
-                        label="Foto"
+                        label="Avatar"
                         name="avatar"
                         accept="image/*"
                         maxCount={1}
                     />
                     <DraggerInput
                         columnSpan={2}
-                        label="Imágenes"
+                        label="Images"
                         name="images"
                         accept="image/*"
                         multiple
                     />
                     <EditorInput
                         columnSpan={2}
-                        label="Descripción"
+                        label="Description"
                         name="description"
                         onImageUpload={onImageUpload}
                     />
-                    <ArrayInput label="Horario" name="schedule" required>
+                    <ArrayInput label="Schedule" name="schedule" required>
                         <SelectInput
-                            label="Día de la semana"
+                            label="Day of the week"
                             name="day"
-                            placeholder="Día de la semana"
+                            placeholder="Day of the week"
                         />
                         <TimePickerInput
-                            label="Hora de apertura"
+                            label="Opening time"
                             name="start_time"
-                            placeholder="Hora de apertura"
+                            placeholder="Opening time"
                             format="HH:mm"
                         />
                         <TimePickerInput
-                            label="Hora de cierre"
+                            label="Closing time"
                             name="end_time"
-                            placeholder="Hora de cierre"
+                            placeholder="Closing time"
                             format="HH:mm"
                         />
-                        <BooleanInput label="¿Día libre?" name="day_off" />
+                        <BooleanInput label="Day off?" name="day_off" />
                     </ArrayInput>
-                    <BooleanInput label="Activo?" name="active" />
+
+                    <BooleanInput label="Active?" name="active" />
                 </>
             ),
         },
     },
     create: {
-        title: 'Crear nuevo usuario',
+        title: 'Create New Game',
     },
     update: {
-        title: (id: string) => `Editar usuario #${id}`,
+        title: (id: string) => `Edit Game #${id}`,
         view: 'drawer',
     },
 })

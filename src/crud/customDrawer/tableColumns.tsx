@@ -4,66 +4,52 @@ import { IUser } from '../../mocks/data/users'
 
 export const tableColumns: TableColumnsType<IUser> = [
     {
-        title: 'Avatar',
-        dataIndex: 'avatar',
-        key: 'avatar',
+        title: 'Cover',
+        dataIndex: 'cover_url',
+        key: 'cover_url',
         width: 90,
         render: (value) => <FileField {...value} />,
     },
     {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        title: 'Title',
+        dataIndex: 'title',
+        key: 'title',
         width: 200,
     },
     {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
+        title: 'Description',
+        dataIndex: 'description',
+        key: 'description',
         width: 200,
     },
     {
-        title: 'Email',
-        dataIndex: 'email',
-        key: 'email',
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
     },
     {
-        title: 'Email 2',
-        dataIndex: 'email',
-        key: 'email 2',
+        title: 'Created at',
+        dataIndex: 'created_at',
+        key: 'created_at',
+        // render: (value) => {
+        //     return (
+        //         <span style={{ whiteSpace: 'nowrap' }}>
+        //             {format(parseISO(value), 'dd.MM.yyyy')}
+        //         </span>
+        //     )
+        // },
     },
+
     {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address 1',
-        ellipsis: true,
-    },
-    {
-        title: 'Address 2',
-        dataIndex: 'address',
-        key: 'address 2',
-        width: 150,
-        ellipsis: true,
-    },
-    {
-        title: 'Group',
-        dataIndex: 'group',
-        key: 'group',
-        width: 300,
-        render: (value) => (Array.isArray(value) ? value.join(', ') : value),
-    },
-    {
-        title: 'Role',
-        dataIndex: 'role',
-        key: 'role',
-        width: 150,
-        ellipsis: true,
-    },
-    {
-        title: 'Active',
-        dataIndex: 'active',
-        key: 'active',
-        width: 150,
-        render: (value) => (value ? 'Yes' : 'No'),
+        title: 'Updated at',
+        dataIndex: 'updated_at',
+        key: 'updated_at',
+        // render: (value) => {
+        //     return (
+        //         <span style={{ whiteSpace: 'nowrap' }}>
+        //             {format(parseISO(value), 'dd.MM.yyyy')}
+        //         </span>
+        //     )
+        // },
     },
 ]

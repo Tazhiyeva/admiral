@@ -16,6 +16,31 @@ export interface IUser {
     schedule: any[]
     active: boolean
     address?: string
+    description?: string
+    title?: string
+    cover_url?: string
+    city?: string
+    matched_players?: MatchedPlayers[]
+    host_user?: HostUser
+    max_players?: string
+    scheduled_time?: string
+}
+
+export interface MatchedPlayers {
+    city?: string
+    first_name?: string
+    last_name?: string
+    photo_url?: string
+    user_id?: string
+    key?: number
+}
+
+export interface HostUser {
+    city?: string
+    first_name?: string
+    last_name?: string
+    photo_url?: string
+    user_id?: string
 }
 
 export class UserList {

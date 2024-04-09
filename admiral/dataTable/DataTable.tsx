@@ -46,7 +46,7 @@ export type DataTableRowSelectionConfig<RecordType> = {
     onSelectionChange?: (selectedRowKeys: Key[], selectedRows: RecordType[]) => void
 }
 
-export function DataTable<RecordType extends { id: number | string }>({
+export function DataTable<RecordType extends { _id: number | string }>({
     resource,
     columns,
     locale,
@@ -197,7 +197,7 @@ export function DataTable<RecordType extends { id: number | string }>({
             const prevId = active?.id
             const nextId = over?.id
             let prevData = data
-            const getIndex = (id: number | string) => data.findIndex((item) => item.id == id)
+            const getIndex = (id: number | string) => data.findIndex((item) => item._id == id)
             if (prevId && nextId && prevId != nextId) {
                 const prevIdx = getIndex(prevId)
                 const nextIdx = getIndex(nextId)
@@ -207,7 +207,7 @@ export function DataTable<RecordType extends { id: number | string }>({
                 reorder(
                     resource,
                     urlState,
-                    nextData.map((i) => i.id),
+                    nextData.map((i) => i._id),
                     [prevId, nextId],
                 ).catch(() => setData(prevData))
             }

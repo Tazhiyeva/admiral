@@ -30,7 +30,7 @@ export const UsersCRUD = createCRUD({
     resource,
     index: {
         title: 'Users CRUD',
-        newButtonText: 'Create New User',
+        newButtonText: 'Hello',
         tableColumns: [
             {
                 title: 'Avatar',
@@ -52,9 +52,9 @@ export const UsersCRUD = createCRUD({
                 key: 'email',
             },
             {
-                title: 'Group',
-                dataIndex: 'group',
-                key: 'group',
+                title: 'Games',
+                dataIndex: 'games',
+                key: 'games',
                 render: (value) => (Array.isArray(value) ? value.join(', ') : value),
             },
             {

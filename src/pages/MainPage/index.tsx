@@ -14,20 +14,13 @@ const MainPage = () => {
         <div className={styles.page}>
             <Card className={styles.page__wrapper} verticalSpace="3xl" horizontalSpace="3xl">
                 <div className={styles.page__container}>
-                    <h1 className={styles.page__title}>Welcome to Admiral! &#9996;&#127995;</h1>
-                    <h3 className={styles.page__descr}>
-                        We have prepared several demos to show you how to use the control panel and
-                        demonstrate all of its features. We hope that these demos will help you
-                        better understand how everything works and how this control panel can make
-                        your work easier.
-                    </h3>
+                    <h1 className={styles.page__title}>
+                        Welcome to oiynlike ARM! &#9996;&#127995;
+                    </h1>
+                    <h3 className={styles.page__descr}></h3>
                     <ul className={styles.page__actions}>
                         <li>
-                            <a
-                                href="https://github.com/dev-family/admiral"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
+                            <a href="google.com" target="_blank" rel="noopener noreferrer">
                                 <Button
                                     view="ghost"
                                     className={styles.button}
@@ -37,43 +30,18 @@ const MainPage = () => {
                                 </Button>
                             </a>
                         </li>
-                        <li>
-                            <a
-                                href="https://twitter.com/dev___family"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Button
-                                    view="ghost"
-                                    className={cn(styles.button, styles['button--twitter'])}
-                                    iconLeft={TwitterIcon}
-                                    iconRight={ArrowDownIcon}
-                                >
-                                    Our twitter
-                                </Button>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://dev.family" target="_blank" rel="noopener noreferrer">
-                                <Button
-                                    view="ghost"
-                                    className={styles.button}
-                                    iconRight={ArrowDownIcon}
-                                >
-                                    Development team
-                                </Button>
-                            </a>
-                        </li>
 
                         <li>
-                            <a href="mailto:admiral@dev.family">
+                            <a href="mailto:madinatazhiyeva@gmail.com">
                                 <Button
                                     view="ghost"
                                     className={cn(styles.button, styles['button--connect_with_us'])}
                                     iconRight={ArrowDownIcon}
                                 >
                                     <span>Connect with us:</span>
-                                    <span className={styles.button__link}>admiral@dev.family</span>
+                                    <span className={styles.button__link}>
+                                        madinatazhiyeva@gmail.com
+                                    </span>
                                 </Button>
                             </a>
                         </li>
@@ -84,7 +52,7 @@ const MainPage = () => {
                         src={image}
                         width="569px"
                         height="284px"
-                        alt="Welcome to Admiral!"
+                        alt="Welcome to oiynlike ARM!"
                     />
                 </div>
             </Card>
